@@ -62,3 +62,8 @@ def create_single_movie(movie_props):
         "subheading":movie_props[5]
     }
     return movie
+
+
+def extract_url_from_css_rules(css_rules):
+    """Extracts url from css rules."""
+    return css_rules
