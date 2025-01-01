@@ -40,5 +40,6 @@ jobs:
           ls -la
 
       - name: Run main program
+        working-directory: ./home/runner/work/movie-screening-scraper/
         run: |
           python scrapy.py
