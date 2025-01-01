@@ -35,11 +35,11 @@ jobs:
       - name: Go up
         run: |
           cd ..
-      - name: List directories
+      - name: List workspace
         run: |
-          ls -la
+          ls ${{github.workspace}}
 
       - name: Run main program
-        working-directory: ./home/runner/work/movie-screening-scraper/
+        working-directory: ${{github.workspace}}
         run: |
           python scrapy.py
