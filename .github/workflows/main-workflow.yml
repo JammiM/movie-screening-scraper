@@ -29,6 +29,12 @@ jobs:
         run: |
           pytest
 
+      - name: List directories and go up
+        run: |
+          ls -la
+          cd ..
+          ls -la
+
       - name: Run main program
         run: |
           python scrapy.py
