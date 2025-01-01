@@ -48,7 +48,8 @@ def extract_text_from_div(div_content):
 
             movie_properties =[title,film_cert,dates,link,img,subheading]
             all_movies.append(create_single_movie(movie_properties))
-    print(all_movies)
+
+    return all_movies
 
 
 def create_single_movie(movie_props):
@@ -57,9 +58,9 @@ def create_single_movie(movie_props):
     movie = {
         "title": movie_props[0],
         "date": movie_props[1],
-        "rating": movie_props[2],
+        "rating": movie_props[2].strip(),
         "link": movie_props[3],
-        "img": movie_props[4],
+        "img": extract_url_from_css_rules(movie_props[4]),
         "subheading":movie_props[5]
     }
     return movie
@@ -82,6 +83,9 @@ def extract_url_from_css_rules(css_style_with_url: str) -> str:
     sheet = cssutils.parseString(joincss)
     finalurl = list(cssutils.getUrls(sheet))[0]
 
-    print(finalurl)
-
     return finalurl
+
+
+div_content_movies = retrieve_url_endpoint()
+extract_text_from_div(div_content_movies)
+print(all_movies)
