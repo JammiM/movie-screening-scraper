@@ -11,6 +11,12 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: "3.9.6"
+
+      - name: Test env vars for python
+        run: python -c 'import os;print(os.environ)'
+        env:
+          ENV_SECRET: ${{ secrets.SMALL_TEST }}
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
