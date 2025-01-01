@@ -29,10 +29,14 @@ jobs:
         run: |
           pytest
 
-      - name: List directories and go up
+      - name: List directories
         run: |
           ls -la
+      - name: Go up
+        run: |
           cd ..
+      - name: List directories
+        run: |
           ls -la
 
       - name: Run main program
