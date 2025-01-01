@@ -5,10 +5,12 @@ import logging
 import requests
 import bs4 as bs
 from bs4 import Tag
+import cssutils
 
 from dotenv import load_dotenv
 load_dotenv()
-
+# TODO : Need to a add cssutils profiles
+cssutils.log.setLevel(logging.CRITICAL)
 
 
 logging.basicConfig(level=logging.DEBUG,
@@ -39,7 +41,6 @@ def extract_text_from_div(div_content):
             link = x.find('a')['href']
             img = x.find('div', {"role": "img"}).get('style')
 
-
             if x.find('div', {"class": "subheading"}) is None:
                 subheading = ''
             else:
@@ -64,6 +65,23 @@ def create_single_movie(movie_props):
     return movie
 
 
-def extract_url_from_css_rules(css_rules):
+def extract_url_from_css_rules(css_style_with_url: str) -> str:
     """Extracts url from css rules."""
-    return css_rules
+
+    #TODO: ADD A PROFILE TO ALLOW via addProfile then validate with os.getenv("CSS_STYLE")
+    # background:linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,.8) 100%),
+    # background-size:cover; background-position:center center;'
+
+    # reference
+    # https://pythonhosted.org/cssutils/docs/profiles.html#cssutils-profile
+    # https://pythonhosted.org/cssutils/docs/profiles.html#cssutils.profiles.Profiles.validateWithProfile
+
+
+    joincss = " ".join(["""div{""", css_style_with_url, """}"""])
+
+    sheet = cssutils.parseString(joincss)
+    finalurl = list(cssutils.getUrls(sheet))[0]
+
+    print(finalurl)
+
+    return finalurl
