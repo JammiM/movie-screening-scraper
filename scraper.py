@@ -23,7 +23,7 @@ all_movies=[]
 
 def retrieve_url_endpoint():
     """Function to retrieve the url endpoint."""
-    response_object = requests.get(os.getenv("API_URL"), timeout=10)
+    response_object = requests.get(os.environ["API_URL"], timeout=10)
     soup = bs.BeautifulSoup(response_object.content, 'html.parser')
 
     movies_div = soup.select_one('#pills-grid > div')
