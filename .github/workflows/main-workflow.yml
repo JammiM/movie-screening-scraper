@@ -42,4 +42,4 @@ jobs:
       - name: Run main program
         working-directory: ${{github.workspace}}
         run: |
-          python scrapy.py
+          python scraper.py
